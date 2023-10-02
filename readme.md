@@ -9,6 +9,10 @@ Starting the database
     show tables: \dt
     show a table schema: \d enrollment
 
+start the dev server
+    symfony server:start
+    visit: http://127.0.0.1:8000/
+
 Creating new table and make a migration and migrate
 
     1- symfony console make:entity entity-name  
