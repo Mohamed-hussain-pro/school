@@ -21,12 +21,39 @@ class Student
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'student', targetEntity: Enrollment::class)]
-    private Collection $enrollments;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Course", mappedBy="students")
+     */
+    private $courses;
 
     public function __construct()
     {
-        $this->enrollments = new ArrayCollection();
+        $this->courses = new ArrayCollection();
+    }
+
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course): self
+    {
+        if (!$this->courses->contains($course)) {
+            $this->courses[] = $course;
+            $course->addStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): self
+    {
+        if ($this->courses->contains($course)) {
+            $this->courses->removeElement($course);
+            $course->removeStudent($this);
+        }
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -54,36 +81,6 @@ class Student
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Enrollment>
-     */
-    public function getEnrollments(): Collection
-    {
-        return $this->enrollments;
-    }
-
-    public function addEnrollment(Enrollment $enrollment): static
-    {
-        if (!$this->enrollments->contains($enrollment)) {
-            $this->enrollments->add($enrollment);
-            $enrollment->setStudent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnrollment(Enrollment $enrollment): static
-    {
-        if ($this->enrollments->removeElement($enrollment)) {
-            // set the owning side to null (unless already changed)
-            if ($enrollment->getStudent() === $this) {
-                $enrollment->setStudent(null);
-            }
-        }
 
         return $this;
     }

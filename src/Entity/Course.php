@@ -22,12 +22,40 @@ class Course
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Enrollment::class)]
-    private Collection $enrollments;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Student", inversedBy="courses")
+     * @ORM\JoinTable(name="enrollment")
+     */
+    private $students;
 
     public function __construct()
     {
-        $this->enrollments = new ArrayCollection();
+        $this->students = new ArrayCollection();
+    }
+
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students[] = $student;
+            $student->addCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->contains($student)) {
+            $this->students->removeElement($student);
+            $student->removeCourse($this);
+        }
+
+        return $this;
     }
 
 
@@ -60,35 +88,6 @@ class Course
         return $this;
     }
 
-    /**
-     * @return Collection<int, Enrollment>
-     */
-    public function getEnrollments(): Collection
-    {
-        return $this->enrollments;
-    }
-
-    public function addEnrollment(Enrollment $enrollment): static
-    {
-        if (!$this->enrollments->contains($enrollment)) {
-            $this->enrollments->add($enrollment);
-            $enrollment->setCourse($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnrollment(Enrollment $enrollment): static
-    {
-        if ($this->enrollments->removeElement($enrollment)) {
-            // set the owning side to null (unless already changed)
-            if ($enrollment->getCourse() === $this) {
-                $enrollment->setCourse(null);
-            }
-        }
-
-        return $this;
-    }
 
     
 }

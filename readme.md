@@ -20,4 +20,8 @@ Creating new table and make a migration and migrate
     3- symfony console doctrine:migrations:migrate
 
 
-    Remove cache php bin/console cache:clear
+debugging
+
+   - Remove cache php bin/console cache:clear
+   - for forms add to the twig file {{ form_errors(form) }}
+   - for controller  var_dump("Reached here"); // Debugging statement
