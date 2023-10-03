@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="row justify-content-center">
+    
+        <div class="col-md-6">
+                <h1 class="text-center" >Add new Course</h1>
+
+    <form class=" mx-auto p-5 align-items-center" action="{{ path('app_new_course') }}" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="course-title">Course Title:</label>
+            <input type="text" class="form-control" id="course-title" name="_user-title">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="course-description">Course Description:</label>
+            <input type="text" class="form-control" id="course-description" name="_user-description">
+        </div>
+        
+        <br>
+            <h3 class="text-center" >Students</h3>
+
+            <div class="mb-3">
+                <label class="form-label" for="student-name-1">Student Name:</label>
+                <input type="text" class="form-control" id="student-name-1" name="_student-name-1">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="student-email-1">Student Email:</label>
+                <input type="text" class="form-control" id="student-email-1" name="_student-email-1">
+            </div>
+        <br>
+
+            <div class="mb-3">
+                <label class="form-label" for="student-name-2">Student Name:</label>
+                <input type="text" class="form-control" id="student-name-2" name="_student-name-2">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="student-email-2">Student Email:</label>
+                <input type="text" class="form-control" id="student-email-2" name="_student-email-2">
+            </div>
+        <br>
+
+            <div class="mb-3">
+                <label class="form-label" for="student-name-3">Student Name:</label>
+                <input type="text" class="form-control" id="student-name-3" name="_student-name-3">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="student-email-3">Student Email:</label>
+                <input type="text" class="form-control" id="student-email-3" name="_student-email-3">
+            </div>
+
+
+        {# If you want to control the URL the user is redirected to on success
+        <input type="hidden" name="_target_path" value="/"> #}
+
+        <input type="hidden" name="_target_path" value="/">
+
+        <button type="submit" class="btn btn-primary" >Submit</button>
+        <a href="{{ path('app_home') }}" class="btn btn-success">Back To Home</a>
+
+    </form>
+    </div>
+    </div>
+{% endblock %}

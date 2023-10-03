@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
-
+    <div class="row justify-content-center">
+        <div class="col-md-9 p-3 w-50">    
     <table class="table">
     <thead>
         <tr>
@@ -14,13 +13,17 @@
     </thead>
     <tbody>
         {% for course in courses%}
-        <tr>
-        <th scope="row">{{course.id}}</th>
-        <td>{{course.title}}</td>
-        <td>{{course.description}}</td>
-        </tr>
+            <tr>
+            <th scope="row">{{course.id}}</th>
+            <td>{{course.title}}</td>
+            <td>{{course.description}}</td>
+            </tr>
         {% endfor %}
-        
     </tbody>
     </table>
+    </div>
+        <div class="col-md-3 p-5">
+            <a href="{{ path('app_new_course') }}" class="btn btn-success">Add New Course</a>
+        </div>
+    </div>
 {% endblock %}
