@@ -7,15 +7,15 @@
         <div class="col-md-6">
                 <h1 class="text-center" >Add new Course</h1>
 
-    <form class=" mx-auto p-5 align-items-center" action="{{ path('app_new_course') }}" method="post">
+    <form class=" mx-auto p-5 align-items-center" action="{{ path('app_new_course_process') }}" method="post">
         <div class="mb-3">
             <label class="form-label" for="course-title">Course Title:</label>
-            <input type="text" class="form-control" id="course-title" name="_user-title">
+            <input type="text" class="form-control" id="course-title" name="_course-title">
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="course-description">Course Description:</label>
-            <input type="text" class="form-control" id="course-description" name="_user-description">
+            <input type="text" class="form-control" id="course-description" name="_course-description">
         </div>
         
         <br>
