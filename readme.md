@@ -18,3 +18,6 @@ Creating new table and make a migration and migrate
     1- symfony console make:entity entity-name  
     2- symfony console make:migration 
     3- symfony console doctrine:migrations:migrate
+
+
+    Remove cache php bin/console cache:clear
